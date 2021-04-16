@@ -1,0 +1,26 @@
+.video-videopage {
+  margin-top: 1rem;
+}
+
+.card-videopage {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  row-gap: 2rem;
+  background-color: initial;
+  border: none;
+}
+.card-videopage .video-title {
+  font-size: 2rem;
+}
+
+.card:hover {
+  border: initial;
+}
+
+.card-videopage .action-bttns {
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 768px) {
+}

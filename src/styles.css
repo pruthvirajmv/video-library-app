@@ -4,6 +4,8 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  min-height: 100vh;
 }
 
 .nav {
@@ -12,10 +14,21 @@
   z-index: 1;
 }
 
+.bttn {
+  font-size: 0.8rem;
+}
+
 .card {
-  background-color: white;
+  background-color: inherit;
+  color: var(--primary);
   border-radius: 0;
-  width: 300px;
+  width: 280px;
+  padding: 0;
+  border: 0.5px solid black;
+}
+
+.card:hover {
+  border: 2px solid lightgray;
 }
 
 .active-page,
@@ -44,4 +57,33 @@
   position: relative;
   top: inherit;
   left: inherit;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-body {
+  margin: auto;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem 1rem;
+}
+
+/* CSS utils */
+.txt-white {
+  color: white;
+}
+
+.txt-primary {
+  color: var(--primary);
+}
+
+.txt-align-left {
+  text-align: left;
+}
+
+.bttn-floating-action {
+  color: black;
+  bottom: 3.5rem;
 }

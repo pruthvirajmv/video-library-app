@@ -1,0 +1,30 @@
+.video-display-playslistspage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 1rem;
+  margin: 0rem 0.5rem;
+}
+
+.playlist-section {
+  margin-top: 0.5rem;
+  border-bottom: 1px solid var(--primary);
+  width: 100%;
+}
+
+.video-display-playslist {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+  overflow: hidden;
+  margin: 1rem 0.5rem;
+}
+
+.video-display-playslist .video-card {
+  width: 18rem;
+}
+
+.playlist-card {
+  width: 10rem;
+}

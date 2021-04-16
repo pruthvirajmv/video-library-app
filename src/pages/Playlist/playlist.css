@@ -1,0 +1,15 @@
+.playlist-head {
+  margin: 1rem auto;
+}
+
+.video-display-playlistpage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  width: 80%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import useVideoLib from "../../context/videos-context";
+import useVideoLib from "../context/videos-context";
 
-export default function Modal({ video, toggleModal }) {
+export default function Modal({ videoId, toggleModal }) {
   const { state, dispatch } = useVideoLib();
 
   const [playlistName, setPlaylistName] = useState("");
 
   function addNewPlaylistHandler() {
     const newPlaylist = playlistName;
-    if (newPlaylist !== "")
+    if (newPlaylist !== "") {
       dispatch({ type: "ADD_NEW_PLAYLIST", payload: newPlaylist });
+    }
+    setPlaylistName("");
   }
 
   return (
@@ -20,24 +22,34 @@ export default function Modal({ video, toggleModal }) {
         </div>
         <div>
           <input
+            value={playlistName}
             onChange={(e) => setPlaylistName(e.target.value)}
-            placeholder="add new "
+            placeholder="create new"
           />
           <button onClick={addNewPlaylistHandler} className="bttn">
             +
           </button>
         </div>
         <div class="modal-body">
-          <ul>
-            {state.playlist.map((list) => (
-              <li>{list.name}</li>
-            ))}
-          </ul>
+          {state.playlist.map((list) => (
+            <label>
+              <input
+                type="checkbox"
+                checked={list.videosAdded.includes(videoId)}
+                onChange={() =>
+                  dispatch({
+                    type: "TOGGLE_VIDEO_IN_PLAYLIST",
+                    payload: { addToPlaylist: list, addVideo: videoId }
+                  })
+                }
+              />
+              &nbsp;{list.name}
+            </label>
+          ))}
         </div>
         <footer>
-          <button class="bttn bttn-primary">Ok</button>
           <button onClick={toggleModal} class="bttn bttn-secondary">
-            Cancel
+            OK
           </button>
         </footer>
       </div>

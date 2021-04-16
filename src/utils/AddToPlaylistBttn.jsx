@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import useVideoLib from "../../context/videos-context";
 import Modal from "./AddToPlaylistModal";
 
-export default function AddToPlaylist({ video }) {
+export default function AddToPlaylist({ videoId }) {
   const [playlistModal, setPlaylistModal] = useState();
 
   function toggleModal() {
@@ -14,7 +13,7 @@ export default function AddToPlaylist({ video }) {
   return (
     <>
       {playlistModal === "Show" && (
-        <Modal video={video} toggleModal={toggleModal} />
+        <Modal videoId={videoId} toggleModal={toggleModal} />
       )}
       <button onClick={toggleModal} className="bttn bttn-secondary">
         AddToPlaylist

@@ -4,9 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 import { VideosContextProvider } from "./context/videos-context";
-// import setupMockVideoServer from "./video-lib-server/mock-server";
+import setupMockVideoServer from "./video-lib-server/mock-server";
 
-// setupMockVideoServer();
+setupMockVideoServer();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
