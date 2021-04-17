@@ -55,6 +55,12 @@ export default function videosReducer(state, { type, payload }) {
         )
       };
 
+      case "ADD_TO_WATCH_HISTORY" :
+        return{
+          ...state,
+          history: state.history.concat(payload)
+        }
+
     default:
       return state;
   }

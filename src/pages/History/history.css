@@ -1,0 +1,10 @@
+.video-display-history{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+    margin-top: 2rem;
+}
+
+

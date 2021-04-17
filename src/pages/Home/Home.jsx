@@ -2,6 +2,7 @@ import "../../styles.css";
 import "./home.css";
 
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom"
 
 import VideoCard from "./VideoCard";
 import useVideoLib from "../../context/videos-context";
@@ -34,9 +35,13 @@ export default function HomePage() {
       <VideoSearch setSearchInput={setSearchInput} />
       <div className="homepage-layout">
         <div className="side-nav">
-          <p>Liked Videos</p>
-          <p>Watch Later</p>
-          <p>All playlist</p>
+          <div className="list">
+          <p><Link to={`/playlists/liked`}>Liked Videos</Link></p>
+          <p><Link to={`/playlists/watchLater`}>Watch Later</Link></p>
+          <p>All playlists</p>
+          <p><Link to={`/history`}>History</Link></p>
+          </div>
+          
         </div>
         <div className="video-display-homepage">
           {displayVideos.map((video) => (

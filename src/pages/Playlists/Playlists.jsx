@@ -6,7 +6,7 @@ import VideoCard from "../Home/VideoCard";
 import { Link } from "react-router-dom";
 
 export default function Playlist() {
-  const { state } = useVideoLib();
+  const { state, dispatch } = useVideoLib();
 
   const likedVideos = state.liked;
   const watchLaterVideos = state.watchLater;
@@ -24,7 +24,7 @@ export default function Playlist() {
             Liked
             <Link to={`/playlists/liked`}>
               <span className="txt-primary text-small"> See All </span>
-            </Link>{" "}
+            </Link>
           </h3>
 
           <div className="video-display-playslist">
@@ -72,6 +72,7 @@ export default function Playlist() {
                     {" "}
                     <span className="txt-white text-small"> See All </span>{" "}
                   </Link>
+                  <button onClick={() => dispatch({type:"DELETE_PLAYLIST", payload: name})} className=""><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </h3>
                 <div className="video-display-playslist">
                   {videosAdded.map((videoId) => (

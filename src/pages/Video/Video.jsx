@@ -12,12 +12,13 @@ import WatchLaterButton from "../../utils/WatchLaterBttn";
 import useVideoLib from "../../context/videos-context";
 
 export default function Video() {
-  const { state } = useVideoLib();
+  const { state, dispatch } = useVideoLib();
   const { videoId } = useParams();
 
   const displayVideo = state.videos.find((video) => video.id === videoId);
 
   useEffect(() => {
+    dispatch({type:"ADD_TO_WATCH_HISTORY", payload : videoId})
     document.title = "Video Lib App | Video";
   }, []);
 

@@ -16,6 +16,7 @@ export function VideosContextProvider({ children }) {
     videos: [],
     liked: [],
     watchLater: [],
+    history: [],
     playlist: [
       {
         name: "myplaylist",

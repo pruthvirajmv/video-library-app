@@ -4,6 +4,7 @@
   align-items: flex-start;
   row-gap: 1rem;
   margin: 0rem 0.5rem;
+  width: 90%;
 }
 
 .playlist-section {
