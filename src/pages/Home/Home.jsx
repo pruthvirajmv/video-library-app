@@ -1,7 +1,7 @@
 import "../../styles.css";
 import "./home.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import VideoCard from "./VideoCard";
 import useVideoLib from "../../context/videos-context";
@@ -25,15 +25,26 @@ export default function HomePage() {
   const displayVideos = searchedVideos(videosFromContext, searchInput);
   console.log(searchInput);
 
+  useEffect(() => {
+    document.title = "Video Lib App | Home";
+  }, []);
+
   return (
     <div>
       <VideoSearch setSearchInput={setSearchInput} />
-      <div className="video-display-homepage">
-        {displayVideos.map((video) => (
-          <div key={video.id}>
-            <VideoCard video={video} />
-          </div>
-        ))}
+      <div className="homepage-layout">
+        <div className="side-nav">
+          <p>Liked Videos</p>
+          <p>Watch Later</p>
+          <p>All playlist</p>
+        </div>
+        <div className="video-display-homepage">
+          {displayVideos.map((video) => (
+            <div key={video.id}>
+              <VideoCard video={video} />
+            </div>
+          ))}
+        </div>
       </div>
       <FloatingActionBttn />
     </div>

@@ -1,6 +1,6 @@
 import "./playlists.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import useVideoLib from "../../context/videos-context";
 import VideoCard from "../Home/VideoCard";
 import { Link } from "react-router-dom";
@@ -11,6 +11,10 @@ export default function Playlist() {
   const likedVideos = state.liked;
   const watchLaterVideos = state.watchLater;
   const playlist = state.playlist;
+
+  useEffect(() => {
+    document.title = "Video Lib App | Playlists";
+  }, []);
 
   return (
     <>

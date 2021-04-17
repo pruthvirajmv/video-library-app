@@ -1,6 +1,6 @@
 import "./playlist.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useVideoLib from "../../context/videos-context";
 
@@ -20,7 +20,9 @@ export default function Playlist() {
     playlist = state[listName.list];
   }
 
-  console.log(listName, playlist);
+  useEffect(() => {
+    document.title = "Video Lib App | Playlist";
+  }, []);
 
   return (
     <>

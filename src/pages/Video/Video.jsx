@@ -2,7 +2,7 @@ import "../../styles.css";
 import "./video.css";
 import "../Home/home.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import YouTube from "react-youtube";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +16,10 @@ export default function Video() {
   const { videoId } = useParams();
 
   const displayVideo = state.videos.find((video) => video.id === videoId);
-  console.log(displayVideo);
+
+  useEffect(() => {
+    document.title = "Video Lib App | Video";
+  }, []);
 
   return (
     <>

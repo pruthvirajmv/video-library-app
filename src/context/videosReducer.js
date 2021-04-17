@@ -1,46 +1,58 @@
-export default function videosReducer(state, action) {
-  console.log(state);
-  switch (action.type) {
+export default function videosReducer(state, { type, payload }) {
+  console.log({ payload });
+  switch (type) {
     case "DATA_FROM_SERVER":
       return {
         ...state,
-        videos: action.payload.videos,
-        playlist: action.payload.playlist
+        videos: payload
       };
 
     case "TOGGLE_WATCH_LATER":
       return {
         ...state,
-        videos: state.videos.map((video) =>
-          video.id === action.payload.id
-            ? { ...video, watchLater: !video.watchLater }
-            : video
-        )
+        watchLater: state.watchLater.includes(payload)
+          ? state.watchLater.filter((id) => id !== payload)
+          : state.watchLater.concat(payload)
       };
 
     case "TOGGLE_LIKE":
       return {
         ...state,
-        videos: state.videos.map((video) =>
-          video.id === action.payload.id
-            ? { ...video, liked: !video.liked }
-            : video
-        )
+        liked: state.liked.includes(payload)
+          ? state.liked.filter((id) => id !== payload)
+          : state.liked.concat(payload)
       };
 
     case "ADD_NEW_PLAYLIST":
       return {
         ...state,
-        playlist: state.playlist.concat({
-          name: action.payload,
-          videosAdded: []
-        })
+        playlist: state.playlist.find(({ name }) => name === payload)
+          ? state.playlist
+          : state.playlist.concat({
+              name: payload,
+              videosAdded: []
+            })
       };
 
     case "DELETE_PLAYLIST":
       return {
         ...state,
-        playlist: state.playlist.filter(({ name }) => name !== action.payload)
+        playlist: state.playlist.filter(({ name }) => name !== payload)
+      };
+
+    case "TOGGLE_VIDEO_IN_PLAYLIST":
+      return {
+        ...state,
+        playlist: state.playlist.map(({ name, videosAdded }) =>
+          name === payload.addToPlaylist.name
+            ? {
+                name,
+                videosAdded: videosAdded.includes(payload.addVideo)
+                  ? videosAdded.filter((video) => video !== payload.addVideo)
+                  : videosAdded.concat(payload.addVideo)
+              }
+            : { name, videosAdded }
+        )
       };
 
     default:

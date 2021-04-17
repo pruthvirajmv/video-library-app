@@ -19,7 +19,7 @@ export default function setupMockVideoServer() {
     },
 
     seeds(server) {
-      videoDB.videos.forEach((video) => server.create("video", video));
+      server.create("video", { ...videoDB });
     }
   });
 }
