@@ -3,8 +3,11 @@ import React, { useState } from "react";
 export default function ProductsSearch({ setSearchInput }) {
   const [input, setInput] = useState("");
 
-  function searchHandler() {
+  function searchHandler(event) {
     setSearchInput(input);
+    if (event.key === "Enter") {
+      setSearchInput(input);
+    }
   }
 
   function clearSearch() {
@@ -21,6 +24,7 @@ export default function ProductsSearch({ setSearchInput }) {
             value={input}
             placeholder="Search videos"
             onChange={(e) => setInput(() => e.target.value)}
+            onKeyDown={searchHandler}
           />
           {input !== "" && (
             <button onClick={clearSearch} class="bttn bttn-secondary">

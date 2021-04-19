@@ -21,7 +21,7 @@ export default function Playlist() {
   }
 
   useEffect(() => {
-    document.title = "Video Lib App | Playlist";
+    document.title = "Video Lib | Playlist";
   }, []);
 
   return (

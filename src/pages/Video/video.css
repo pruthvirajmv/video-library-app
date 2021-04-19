@@ -1,11 +1,11 @@
-.video-videopage {
-  margin-top: 1rem;
-}
-
 .card-videopage {
   width: 100%;
   max-width: 640px;
-  margin: auto;
+  margin: 1rem auto;
+}
+
+.card-videopage .card {
+  width: 100%;
   row-gap: 2rem;
   background-color: initial;
   border: none;

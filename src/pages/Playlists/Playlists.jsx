@@ -13,7 +13,7 @@ export default function Playlist() {
   const playlist = state.playlist;
 
   useEffect(() => {
-    document.title = "Video Lib App | Playlists";
+    document.title = "Video Lib | Playlists";
   }, []);
 
   return (
@@ -72,7 +72,14 @@ export default function Playlist() {
                     {" "}
                     <span className="txt-white text-small"> See All </span>{" "}
                   </Link>
-                  <button onClick={() => dispatch({type:"DELETE_PLAYLIST", payload: name})} className=""><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <button
+                    onClick={() =>
+                      dispatch({ type: "DELETE_PLAYLIST", payload: name })
+                    }
+                    className=""
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
                 </h3>
                 <div className="video-display-playslist">
                   {videosAdded.map((videoId) => (

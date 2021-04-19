@@ -2,7 +2,7 @@ import "../../styles.css";
 import "./home.css";
 
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import VideoCard from "./VideoCard";
 import useVideoLib from "../../context/videos-context";
@@ -27,31 +27,40 @@ export default function HomePage() {
   console.log(searchInput);
 
   useEffect(() => {
-    document.title = "Video Lib App | Home";
+    document.title = "Video Lib | Home";
   }, []);
 
   return (
-    <div>
+    <>
       <VideoSearch setSearchInput={setSearchInput} />
       <div className="homepage-layout">
         <div className="side-nav">
           <div className="list">
-          <p><Link to={`/playlists/liked`}>Liked Videos</Link></p>
-          <p><Link to={`/playlists/watchLater`}>Watch Later</Link></p>
-          <p>All playlists</p>
-          <p><Link to={`/history`}>History</Link></p>
+            <p>
+              <i class="fa fa-home" aria-hidden="true"></i> &nbsp;
+              <Link to={`/playlists/liked`}>Liked Videos</Link>
+            </p>
+            <p>
+              <i class="fa fa-clock-o" aria-hidden="true"></i> &nbsp;
+              <Link to={`/playlists/watchLater`}>Watch Later</Link>
+            </p>
+            <p>
+              <i class="fa fa-list" aria-hidden="true"></i> &nbsp;
+              <Link to={`/playlists`}>All playlists</Link>
+            </p>
+            <p>
+              <i class="fa fa-history" aria-hidden="true"></i> &nbsp;
+              <Link to={`/history`}>History</Link>
+            </p>
           </div>
-          
         </div>
         <div className="video-display-homepage">
           {displayVideos.map((video) => (
-            <div key={video.id}>
-              <VideoCard video={video} />
-            </div>
+            <VideoCard key={video.id} video={video} />
           ))}
         </div>
       </div>
       <FloatingActionBttn />
-    </div>
+    </>
   );
 }

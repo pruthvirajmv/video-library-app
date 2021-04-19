@@ -18,14 +18,14 @@ export default function Video() {
   const displayVideo = state.videos.find((video) => video.id === videoId);
 
   useEffect(() => {
-    dispatch({type:"ADD_TO_WATCH_HISTORY", payload : videoId})
-    document.title = "Video Lib App | Video";
+    dispatch({ type: "ADD_TO_WATCH_HISTORY", payload: videoId });
+    document.title = "Video Lib | Video";
   }, []);
 
   return (
-    <>
-      <YouTube className="video-videopage" videoId={displayVideo.id} />
-      <div className={`card card-videopage `}>
+    <div className="card-videopage">
+      <YouTube videoId={displayVideo.id} />
+      <div className="card ">
         <div className="video-title">
           <span>{displayVideo.name}</span>
         </div>
@@ -35,6 +35,6 @@ export default function Video() {
           <LikeBttn displayVideo={displayVideo.id} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -17,7 +17,9 @@ export default function VideoCard({ video }) {
         </Link>
         <div className="video-details">
           <div className="video-title">
-            <span>{video.name}</span>
+            <Link to={`/${video.id}`}>
+              <span>{video.name}</span>
+            </Link>
             <LikeBttn videoId={video.id} />
           </div>
 
