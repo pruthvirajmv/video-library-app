@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import VideoCard from "./VideoCard";
-import useVideoLib from "../../context/videos-context";
+import {useVideoLib} from "../../context";
 import VideoSearch from "./VideoSearch";
-import FloatingActionBttn from "../../utils/FloatingActionBttn";
+import { FloatingActionBttn } from "../../utils";
 
-export default function HomePage() {
+export function Home() {
   const { state } = useVideoLib();
   const [searchInput, setSearchInput] = useState("");
 
@@ -24,7 +24,6 @@ export default function HomePage() {
   }
 
   const displayVideos = searchedVideos(videosFromContext, searchInput);
-  console.log(searchInput);
 
   useEffect(() => {
     document.title = "Video Lib | Home";

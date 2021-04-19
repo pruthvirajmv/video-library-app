@@ -2,11 +2,11 @@ import "./playlist.css";
 
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useVideoLib from "../../context/videos-context";
+import {useVideoLib} from "../../context";
 
 import VideoCard from "../Home/VideoCard";
 
-export default function Playlist() {
+export function Playlist() {
   const { state } = useVideoLib();
   const listName = useParams();
   let playlist = [];
@@ -32,7 +32,6 @@ export default function Playlist() {
           playlist.map((videoId) => (
             <div>
               <VideoCard
-                styles={{ width: "10rem" }}
                 video={state.videos.find(({ id }) => id === videoId)}
               />
             </div>

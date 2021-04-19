@@ -1,13 +1,13 @@
-import useVideoLib from "../context/videos-context";
+import { useVideoLib, dispatchTypeEnum } from "../context";
 
-export default function WatchLaterButton({ videoId }) {
+export function WatchLaterBttn({ videoId }) {
   const { state, dispatch } = useVideoLib();
 
   return (
     <>
       <button
         onClick={() =>
-          dispatch({ type: "TOGGLE_WATCH_LATER", payload: videoId })
+          dispatch({ type: dispatchTypeEnum.TOGGLE_WATCH_LATER, payload: videoId })
         }
         className="bttn bttn-primary"
       >

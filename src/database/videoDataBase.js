@@ -5,7 +5,6 @@ const videoDB = {
       imageSrc:
         "https://i.ytimg.com/vi/Ezk2AwqgS9Q/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC3tbVBpbl-6HgmhMkEpWbjqlYlhQ",
       name: "launching neog.camp: roadmap to full stack dev",
-      duration: "48:46"
     },
     {
       id: "_L-UszPmy2A",

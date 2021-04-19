@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import useVideoLib from "../context/videos-context";
+import { useVideoLib, dispatchTypeEnum } from "../context";
 
-export default function Modal({ videoId, toggleModal }) {
+export function AddToPlaylistModal({ videoId, toggleModal }) {
   const { state, dispatch } = useVideoLib();
 
   const [playlistName, setPlaylistName] = useState("");
@@ -9,7 +9,7 @@ export default function Modal({ videoId, toggleModal }) {
   function addNewPlaylistHandler() {
     const newPlaylist = playlistName;
     if (newPlaylist !== "") {
-      dispatch({ type: "ADD_NEW_PLAYLIST", payload: newPlaylist });
+      dispatch({ type: dispatchTypeEnum.ADD_NEW_PLAYLIST, payload: newPlaylist });
     }
     setPlaylistName("");
   }
@@ -38,7 +38,7 @@ export default function Modal({ videoId, toggleModal }) {
                 checked={list.videosAdded.includes(videoId)}
                 onChange={() =>
                   dispatch({
-                    type: "TOGGLE_VIDEO_IN_PLAYLIST",
+                    type: dispatchTypeEnum.TOGGLE_VIDEO_IN_PLAYLIST,
                     payload: { addToPlaylist: list, addVideo: videoId }
                   })
                 }

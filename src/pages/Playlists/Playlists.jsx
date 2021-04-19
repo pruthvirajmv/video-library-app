@@ -1,11 +1,11 @@
 import "./playlists.css";
 
 import React, { useEffect } from "react";
-import useVideoLib from "../../context/videos-context";
+import { useVideoLib, dispatchTypeEnum } from "../../context";
 import VideoCard from "../Home/VideoCard";
 import { Link } from "react-router-dom";
 
-export default function Playlist() {
+export function Playlists() {
   const { state, dispatch } = useVideoLib();
 
   const likedVideos = state.liked;
@@ -74,7 +74,7 @@ export default function Playlist() {
                   </Link>
                   <button
                     onClick={() =>
-                      dispatch({ type: "DELETE_PLAYLIST", payload: name })
+                      dispatch({ type: dispatchTypeEnum.DELETE_PLAYLIST, payload: name })
                     }
                     className=""
                   >

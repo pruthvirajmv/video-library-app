@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "./AddToPlaylistModal";
+import {AddToPlaylistModal} from "./AddToPlaylistModal";
 
-export default function AddToPlaylist({ videoId }) {
-  const [playlistModal, setPlaylistModal] = useState();
+export function AddToPlaylistBttn({ videoId }) {
+  const [playlistModal, setPlaylistModal] = useState("Hide");
 
   function toggleModal() {
     playlistModal === "Show"
@@ -13,7 +13,7 @@ export default function AddToPlaylist({ videoId }) {
   return (
     <>
       {playlistModal === "Show" && (
-        <Modal videoId={videoId} toggleModal={toggleModal} />
+        <AddToPlaylistModal videoId={videoId} toggleModal={toggleModal} />
       )}
       <button onClick={toggleModal} className="bttn bttn-secondary">
         AddToPlaylist

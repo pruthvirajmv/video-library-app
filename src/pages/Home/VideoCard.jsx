@@ -4,9 +4,7 @@ import "./home.css";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import AddToPlaylist from "../../utils/AddToPlaylistBttn";
-import LikeBttn from "../../utils/LikeBttn";
-import WatchLaterButton from "../../utils/WatchLaterBttn";
+import { AddToPlaylistBttn, LikeBttn, WatchLaterBttn } from "../../utils";
 
 export default function VideoCard({ video }) {
   return (
@@ -24,8 +22,8 @@ export default function VideoCard({ video }) {
           </div>
 
           <div className="action-bttns">
-            <AddToPlaylist videoId={video.id} />
-            <WatchLaterButton videoId={video.id} />
+            <AddToPlaylistBttn videoId={video.id} />
+            <WatchLaterBttn videoId={video.id} />
           </div>
         </div>
       </div>

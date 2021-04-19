@@ -1,4 +1,4 @@
-export default function FloatingActionBttn() {
+export function FloatingActionBttn() {
   return (
     <>
       <a href="#top">
