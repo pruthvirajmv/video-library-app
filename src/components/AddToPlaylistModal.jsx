@@ -9,7 +9,10 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
   function addNewPlaylistHandler() {
     const newPlaylist = playlistName;
     if (newPlaylist !== "") {
-      dispatch({ type: dispatchTypeEnum.ADD_NEW_PLAYLIST, payload: newPlaylist });
+      dispatch({
+        type: dispatchTypeEnum.ADD_NEW_PLAYLIST,
+        payload: newPlaylist
+      });
     }
     setPlaylistName("");
   }
@@ -32,7 +35,7 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
         </div>
         <div class="modal-body">
           {state.playlist.map((list) => (
-            <label>
+            <label key={videoId}>
               <input
                 type="checkbox"
                 checked={list.videosAdded.includes(videoId)}

@@ -7,8 +7,10 @@ export function LikeBttn({ videoId }) {
   return (
     <>
       <button
-        onClick={() => dispatch({ type: dispatchTypeEnum.TOGGLE_LIKE , payload: videoId })}
-        class="video-like"
+        onClick={() =>
+          dispatch({ type: dispatchTypeEnum.TOGGLE_LIKE, payload: videoId })
+        }
+        className="video-like"
         style={{ color: state.liked.includes(videoId) ? "" : "black" }}
       >
         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
