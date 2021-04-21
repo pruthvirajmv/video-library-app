@@ -2,7 +2,7 @@ import "./playlist.css";
 
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {useVideoLib} from "../../context";
+import { useVideoLib } from "../../context";
 
 import VideoCard from "../Home/VideoCard";
 
@@ -30,7 +30,7 @@ export function Playlist() {
       <div className="video-display-playlistpage">
         {playlist.length > 0 ? (
           playlist.map((videoId) => (
-            <div>
+            <div key={videoId}>
               <VideoCard
                 video={state.videos.find(({ id }) => id === videoId)}
               />

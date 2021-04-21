@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import VideoCard from "./VideoCard";
-import {useVideoLib} from "../../context";
+import { useVideoLib } from "../../context";
 import VideoSearch from "./VideoSearch";
 import { FloatingActionBttn } from "../../components";
 
@@ -36,7 +36,7 @@ export function Home() {
         <div className="side-nav">
           <div className="list">
             <p>
-              <i class="fa fa-home" aria-hidden="true"></i> &nbsp;
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> &nbsp;
               <Link to={`/playlists/liked`}>Liked Videos</Link>
             </p>
             <p>
