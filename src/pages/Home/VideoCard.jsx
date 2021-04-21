@@ -4,7 +4,7 @@ import "./home.css";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { AddToPlaylistBttn, LikeBttn, WatchLaterBttn } from "../../utils";
+import { AddToPlaylistBttn, LikeBttn, WatchLaterBttn } from "../../components";
 
 export default function VideoCard({ video }) {
   return (

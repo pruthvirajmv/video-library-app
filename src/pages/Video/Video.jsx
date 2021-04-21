@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import YouTube from "react-youtube";
 import { useParams } from "react-router-dom";
 
-import { AddToPlaylistBttn, LikeBttn, WatchLaterBttn } from "../../utils";
+import { AddToPlaylistBttn, LikeBttn, WatchLaterBttn } from "../../components";
 import { useVideoLib, dispatchTypeEnum } from "../../context";
 
 export function Video() {

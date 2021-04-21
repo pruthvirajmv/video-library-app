@@ -3,7 +3,7 @@ import "./styles.css";
 import { Home, Playlists, Playlist, History, Video } from "./pages";
 
 import videoDB from "./database/videoDataBase";
-import {AppNavBar} from "./utils";
+import {AppNavBar} from "./components";
 
 import { Routes, Route, NavLink } from "react-router-dom";
 import { useVideoLib, dispatchTypeEnum } from "./context";

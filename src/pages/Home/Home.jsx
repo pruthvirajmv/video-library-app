@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
 import {useVideoLib} from "../../context";
 import VideoSearch from "./VideoSearch";
-import { FloatingActionBttn } from "../../utils";
+import { FloatingActionBttn } from "../../components";
 
 export function Home() {
   const { state } = useVideoLib();
