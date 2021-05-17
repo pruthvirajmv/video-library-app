@@ -2,7 +2,7 @@ export function FloatingActionBttn() {
   return (
     <>
       <a href="#top">
-        <button class="bttn bttn-floating-action">Up</button>
+        <button className="bttn bttn-floating-action">Up</button>
       </a>
     </>
   );

@@ -16,21 +16,24 @@ setSearchInput("");
 
 return (
 <>
-  <div className="search-bar">
-    <div class="input-bar">
-      <input type="text" value={input} placeholder="Search videos" onChange={(e)=> setInput(() => e.target.value)}
-      onKeyDown={searchHandler}
+  <div className="search-bar input input-primary">
+      <input 
+        className="input"
+        type="text" value={input} placeholder="Search videos" onChange={(e)=> setInput(() => e.target.value)}
+        onKeyDown={searchHandler}
       />
       {input !== "" && (
-      <button onClick={clearSearch} class="bttn bttn-secondary">
-        <i class="fa fa-times" aria-hidden="true"></i>
-      </button>
+        <i 
+        className="fa fa-times" aria-hidden="true"
+        onClick={clearSearch}>
+        </i>
       )}
+      <i 
+      class="fa fa-search" aria-hidden="true" 
+      onClick={()=>setSearchInput(input)}>
+    </i>
     </div>
-    <button class="bttn bttn-primary" onClick={()=>setSearchInput(input)}>
-      Search
-    </button>
-  </div>
+
 </>
 );
 }

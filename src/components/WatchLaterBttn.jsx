@@ -1,21 +1,26 @@
-import { useVideoLib, dispatchTypeEnum } from "../context";
+import { useState } from "react";
+import { useAuth, useVideoLib } from "../context";
+import { toggleWatchLater } from "../utils";
 
 export function WatchLaterBttn({ videoId }) {
-  const { state, dispatch } = useVideoLib();
+  const { state, dispatch, setIsLoading } = useVideoLib();
+  const {authState : {userId}} = useAuth();
+
+  const [showText, setShowText] = useState(false)
 
   return (
     <>
-      <button
-        onClick={() =>
-          dispatch({ type: dispatchTypeEnum.TOGGLE_WATCH_LATER, payload: videoId })
-        }
-        className="bttn bttn-primary"
+      <div
+        onMouseEnter = {() => setShowText(true)}
+        onMouseLeave = {() => setShowText(false)}
+        onClick={() => toggleWatchLater(userId, videoId, dispatch, setIsLoading)}
+        className="video-bttn"
       >
-        Watchlater&nbsp;
-        {state.watchLater.includes(videoId) && (
-          <i class="fa fa-check-circle" aria-hidden="true"></i>
-        )}
-      </button>
+        {state.watchLater.find(video => video._id === videoId)
+        ? <div>{showText && <span>Added </span>}<i className="fa fa-check-circle fa-lg" aria-hidden="true"></i></div>
+        : <div>{showText && <span>Watchlater </span>}<i className="fa fa-clock-o fa-lg" aria-hidden="true"></i></div>
+        }
+      </div>
     </>
   );
 }

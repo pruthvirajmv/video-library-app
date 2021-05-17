@@ -1,12 +1,15 @@
 import "./playlists.css";
 
 import React, { useEffect } from "react";
-import { useVideoLib, dispatchTypeEnum } from "../../context";
+import { useAuth, useVideoLib } from "../../context";
+import { deletePlaylist } from "../../utils";
 import VideoCard from "../Home/VideoCard";
+import PlaylistVideoCard from "./PlaylistVideoCard";
 import { Link } from "react-router-dom";
 
 export function Playlists() {
-  const { state, dispatch } = useVideoLib();
+  const { state, dispatch, setIsLoading } = useVideoLib();
+  const { authState: {userId}} = useAuth();
 
   const likedVideos = state.liked;
   const watchLaterVideos = state.watchLater;
@@ -22,16 +25,16 @@ export function Playlists() {
         <div className="playlist-section">
           <h3 className="txt-white txt-align-left">
             Liked
-            <Link to={`/playlists/liked`}>
+            <Link to={`/liked`}>
               <span className="txt-primary text-small"> See All </span>
             </Link>
           </h3>
 
           <div className="video-display-playslist">
             {likedVideos.length > 0 ? (
-              likedVideos.map((videoId) => (
+              likedVideos.map((video) => (
                 <VideoCard
-                  video={state.videos.find(({ id }) => id === videoId)}
+                  video={video}
                 />
               ))
             ) : (
@@ -43,16 +46,16 @@ export function Playlists() {
         <div className="playlist-section">
           <h3 className="txt-white txt-align-left">
             Watch later
-            <Link to={`/playlists/watchLater`}>
+            <Link to={`/watchLater`}>
               <span className="txt-primary text-small"> See All </span>
             </Link>
           </h3>
 
           <div className="video-display-playslist">
             {watchLaterVideos.length > 0 ? (
-              watchLaterVideos.map((videoId) => (
+              watchLaterVideos.map((video) => (
                 <VideoCard
-                  video={state.videos.find(({ id }) => id === videoId)}
+                  video={ video }
                 />
               ))
             ) : (
@@ -64,7 +67,7 @@ export function Playlists() {
         <div className="playlist-section">
           <h3 className="txt-white txt-align-left">Playlists</h3>
           {playlist.length > 0 ? (
-            playlist.map(({ name, videosAdded }) => (
+            playlist.map(({ name, videos }) => (
               <div>
                 <h3 className="txt-primary txt-align-left">
                   {name}
@@ -73,19 +76,17 @@ export function Playlists() {
                     <span className="txt-white text-small"> See All </span>{" "}
                   </Link>
                   <button
-                    onClick={() =>
-                      dispatch({ type: dispatchTypeEnum.DELETE_PLAYLIST, payload: name })
-                    }
-                    className=""
+                    onClick={() => deletePlaylist(userId, name, dispatch, setIsLoading)}
+                    className="bttn bttn-secondary"
                   >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
                   </button>
                 </h3>
                 <div className="video-display-playslist">
-                  {videosAdded.map((videoId) => (
-                    <VideoCard
-                      styles={{ width: "10rem" }}
-                      video={state.videos.find(({ id }) => id === videoId)}
+                  {videos.map((video) => (
+                    <PlaylistVideoCard
+                      video={video}
+                      playlistName={name}
                     />
                   ))}
                 </div>

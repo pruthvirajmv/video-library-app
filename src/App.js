@@ -1,37 +1,47 @@
 import "./styles.css";
 
-import { Home, Playlists, Playlist, History, Video } from "./pages";
+import { Home, Playlists, Playlist, History, Video, Login, SignUp, ResetPassword, Profile, WatchLater, LikedVideos } from "./pages";
+import { PrivateRoute } from "./PrivateRoute/PrivateRoute"
 
-import videoDB from "./database/videoDataBase";
-import { AppNavBar } from "./components";
+import { AppNavBar, AppSideNavBar,AppSideNavBarMobile, FloatingActionBttn, Footer, Loader } from "./components";
 
 import { Routes, Route } from "react-router-dom";
-import { useVideoLib, dispatchTypeEnum } from "./context";
-import { useEffect } from "react";
+import { useVideoLib } from "./context";
+import { useState } from "react";
 
 export default function App() {
-  const { dispatch } = useVideoLib();
 
-  useEffect(
-    () =>
-      dispatch({
-        type: dispatchTypeEnum.DATA_FROM_SERVER,
-        payload: videoDB.videos
-      }),
-    []
-  );
+  const { isLoading } = useVideoLib();
+
+  const [showNav, setShowNav] = useState(true)
 
   return (
     <div className="App">
-      <AppNavBar />
+      <AppNavBar setShowNav={setShowNav} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:videoId" element={<Video />} />
-        <Route path="/playlists" element={<Playlists />} />
-        <Route path="/playlists/:list" element={<Playlist />} />
-        <Route path="/history" element={<History />} />
-      </Routes>
+      { isLoading && <Loader/>}
+      <main className="app-layout">
+
+          <AppSideNavBar showNav = {showNav} />
+          <AppSideNavBarMobile showNav = {showNav} />
+        <div className="app-display">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <PrivateRoute path="/:videoId" element={<Video />} />
+            <PrivateRoute path="/playlists" element={<Playlists />} />
+            <PrivateRoute path="/playlists/:list" element={<Playlist />} />
+            <PrivateRoute path="/history" element={<History />} />
+            <PrivateRoute path="/watchLater" element={<WatchLater/>} />
+            <PrivateRoute path="/liked" element={<LikedVideos/>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/reset" element={<ResetPassword/>} />
+          </Routes>
+        </div>
+        <Footer/>
+      </main>
+      <FloatingActionBttn/>
     </div>
   );
 }

@@ -1,8 +1,3 @@
-export {
-    dispatchTypeEnum
-}
-from "./dispatchTypeEnum";
-export {
-    useVideoLib
-}
-from "./videos-context"
+
+export { useVideoLib } from "./videos/videos-context";
+export { useAuth } from "./auth/auth-context";

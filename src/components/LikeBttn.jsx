@@ -1,19 +1,18 @@
 import React from "react";
-import { useVideoLib, dispatchTypeEnum } from "../context";
+import { useAuth, useVideoLib } from "../context";
+import { toggleLikedVideo } from "../utils"
 
 export function LikeBttn({ videoId }) {
-  const { state, dispatch } = useVideoLib();
-
+  const { state, dispatch, setIsLoading } = useVideoLib();
+  const {authState: {userId}} = useAuth();
   return (
     <>
       <button
-        onClick={() =>
-          dispatch({ type: dispatchTypeEnum.TOGGLE_LIKE, payload: videoId })
-        }
+        onClick={() => toggleLikedVideo(userId, videoId, dispatch, setIsLoading) }
         className="video-like"
-        style={{ color: state.liked.includes(videoId) ? "" : "black" }}
+        style={{ color: state.liked.find(video => video._id === videoId) ? "" : "black" }}
       >
-        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        <i className="fa fa-thumbs-up" aria-hidden="true"></i>
       </button>
     </>
   );

@@ -4,22 +4,35 @@
   margin: 1rem auto;
 }
 
+.card-videopage .youtube-video {
+  width: 100%;
+}
+
 .card-videopage .card {
   width: 100%;
-  row-gap: 2rem;
+  row-gap: 1rem;
   background-color: initial;
   border: none;
 }
 .card-videopage .video-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .card:hover {
   border: initial;
 }
+.card-videopage .sub-details {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+}
 
 .card-videopage .action-bttns {
   justify-content: flex-end;
+}
+
+.card-videopage .video-like {
+  align-self: flex-end;
 }
 
 @media screen and (min-width: 768px) {

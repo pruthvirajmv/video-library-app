@@ -1,29 +1,41 @@
 import "../../styles.css";
 import "./home.css";
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { AddToPlaylistBttn, LikeBttn, WatchLaterBttn } from "../../components";
 
 export default function VideoCard({ video }) {
+
+  const [showBttns, setShowBttns] = useState(false)
+
   return (
     <>
-      <div key={video.id} className="card video-card">
-        <Link to={`/${video.id}`}>
-          <img className="video-image" src={video.imageSrc} alt="video" />
-        </Link>
+      <div key={video.videoId} className="card video-card">
+        <div
+            onMouseEnter = {() => setShowBttns(true)}
+            onMouseLeave = {() => setShowBttns(false)}
+        >
+          <Link to={`/${video.videoId}`}>
+            <img 
+            className="video-image" src={video.image} alt="video" />
+          </Link>
+            { showBttns && <div className="action-bttns">
+            <AddToPlaylistBttn videoId={video._id} />
+            <WatchLaterBttn videoId={video._id} />
+          </div>}
+          
+        </div>
         <div className="video-details">
           <div className="video-title">
-            <Link to={`/${video.id}`}>
-              <span>{video.name}</span>
+          <img className="avatar avatar-small" src={video.avatar}/>
+          <div>
+            <Link to={`/${video.videoId}`}>
+              <span className="video-name" >{video.name}</span>
             </Link>
-            <LikeBttn videoId={video.id} />
-          </div>
-
-          <div className="action-bttns">
-            <AddToPlaylistBttn videoId={video.id} />
-            <WatchLaterBttn videoId={video.id} />
+            </div>
+            <LikeBttn videoId={video._id} />
           </div>
         </div>
       </div>

@@ -2,11 +2,13 @@ import "./history.css";
 
 import { useEffect } from "react";
 
-import { useVideoLib } from "../../context";
-import VideoCard from "../Home/VideoCard";
+import { useAuth, useVideoLib } from "../../context";
+import HistoryVideoCard from "./HistoryVideoCard";
+import {clearHistory} from "../../utils";
 
 export function History() {
-  const { state } = useVideoLib();
+  const { state, dispatch, setIsLoading } = useVideoLib();
+  const { authState: {userId } } = useAuth();
 
   useEffect(() => {
     document.title = "Video lib | History";
@@ -14,13 +16,19 @@ export function History() {
 
   return (
     <>
-      <h2 className="txt-white">History</h2>
+      <div className="history-head">
+        <h2 className="txt-white">Watch History</h2> 
+        <button 
+          onClick={() => clearHistory(userId, dispatch, setIsLoading)}
+          className="text-small">Clear All</button>
+      </div>
       <div className="video-display-history">
-        {state.history.map((videoId) => (
-          <div key={videoId}>
-            <VideoCard video={state.videos.find(({ id }) => id === videoId)} />
-          </div>
-        ))}
+        { state.history.length>0
+          ?state.history.map((video) => (
+            <HistoryVideoCard video = {video} />
+            ))
+          : <p>Watched videos will appear here</p>
+        }
       </div>
     </>
   );

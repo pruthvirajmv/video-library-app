@@ -9,16 +9,8 @@ import VideoCard from "../Home/VideoCard";
 export function Playlist() {
   const { state } = useVideoLib();
   const listName = useParams();
-  let playlist = [];
+  let playlist = state.playlist.find((list) => list.name === listName.list).videos
 
-  if (listName.list !== "watchLater" && listName.list !== "liked") {
-    const selectedList = state.playlist.find((list) => {
-      return list.name === listName.list;
-    });
-    playlist = selectedList.videosAdded;
-  } else {
-    playlist = state[listName.list];
-  }
 
   useEffect(() => {
     document.title = "Video Lib | Playlist";
@@ -29,10 +21,10 @@ export function Playlist() {
       <h2 className="txt-white playlist-head">{listName.list}</h2>
       <div className="video-display-playlistpage">
         {playlist.length > 0 ? (
-          playlist.map((videoId) => (
-            <div key={videoId}>
+          playlist.map((video) => (
+            <div key={video.videoId}>
               <VideoCard
-                video={state.videos.find(({ id }) => id === videoId)}
+                video={video}
               />
             </div>
           ))

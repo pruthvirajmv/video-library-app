@@ -12,12 +12,35 @@
   min-height: 100vh;
 }
 
+main {
+  min-height: calc(85vh - 7rem);
+}
+
+.app-layout {
+  display: block;
+}
+
+.app-display {
+  display: block;
+  grid-area: display;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
 .nav {
   position: sticky;
   top: 0;
   z-index: 1;
   color: var(--primary);
   height: 4rem;
+}
+
+.bttn-hamburger {
+  margin-right: 1rem;
+  background-color: #000000;
+  color: var(--primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
 }
 
 .active-page {
@@ -39,7 +62,7 @@
   background-color: inherit;
   color: var(--primary);
   border-radius: 0;
-  width: 250px;
+  width: 300px;
   padding: 0;
   border: none;
 }
@@ -70,13 +93,35 @@
 }
 
 .modal-body {
-  margin: auto;
-  margin-top: 0.5rem;
+  width: 100%;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 0.5rem 1rem;
+  row-gap: 1rem;
+}
+
+/* Footer styles */
+
+.footer-nav {
+  position: relative;
+  width: 100%;
+  padding: 1rem 1rem;
+  /* margin-top: 2rem; */
+  grid-area: footer;
+}
+
+.footer-nav .nav-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bttn-floating-action {
+  color: black;
+  bottom: 3.5rem;
+  z-index: 2;
 }
 
 /* CSS components */
@@ -92,7 +137,24 @@
   text-align: left;
 }
 
-.bttn-floating-action {
-  color: black;
-  bottom: 3.5rem;
+/* css utils */
+.flex-row {
+  display: flex;
+  width: 100%;
+}
+
+.input-checkbox {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media screen and (min-width: 769px) {
+  .app-layout {
+    display: grid;
+    grid-template-areas:
+      "side-nav display"
+      "footer footer";
+    grid-template-columns: auto 1fr;
+    justify-content: center;
+  }
 }

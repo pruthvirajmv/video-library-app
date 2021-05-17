@@ -1,29 +1,28 @@
 import React, { useState } from "react";
-import { useVideoLib, dispatchTypeEnum } from "../context";
+import { useAuth, useVideoLib } from "../context";
+import { createNewPlaylist, toggleVideoInPlaylist } from "../utils";
 
 export function AddToPlaylistModal({ videoId, toggleModal }) {
-  const { state, dispatch } = useVideoLib();
+  const { state, dispatch, setIsLoading } = useVideoLib();
+  const { authState: {userId}} = useAuth();
 
   const [playlistName, setPlaylistName] = useState("");
 
   function addNewPlaylistHandler() {
     const newPlaylist = playlistName;
     if (newPlaylist !== "") {
-      dispatch({
-        type: dispatchTypeEnum.ADD_NEW_PLAYLIST,
-        payload: newPlaylist
-      });
+      createNewPlaylist(userId, playlistName, dispatch, setIsLoading)
     }
     setPlaylistName("");
   }
 
   return (
     <div className="modal-container">
-      <div class="modal">
-        <div class="modal-title">
+      <div className="modal">
+        <div className="modal-title">
           <h3>Playlists</h3>
         </div>
-        <div>
+        <div className="flex-row">
           <input
             value={playlistName}
             onChange={(e) => setPlaylistName(e.target.value)}
@@ -33,25 +32,21 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
             +
           </button>
         </div>
-        <div class="modal-body">
+        <div className="modal-body">
           {state.playlist.map((list) => (
             <label key={videoId}>
               <input
+              className="input-checkbox"
                 type="checkbox"
-                checked={list.videosAdded.includes(videoId)}
-                onChange={() =>
-                  dispatch({
-                    type: dispatchTypeEnum.TOGGLE_VIDEO_IN_PLAYLIST,
-                    payload: { addToPlaylist: list, addVideo: videoId }
-                  })
-                }
+                checked={list.videos.some(video => video._id === videoId)}
+                onChange={() => toggleVideoInPlaylist(userId, list.name, videoId, dispatch, setIsLoading) }
               />
               &nbsp;{list.name}
             </label>
           ))}
         </div>
         <footer>
-          <button onClick={toggleModal} class="bttn bttn-secondary">
+          <button onClick={toggleModal} className="bttn bttn-secondary">
             OK
           </button>
         </footer>
