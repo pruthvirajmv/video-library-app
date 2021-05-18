@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 
 export function Playlists() {
   const { state, dispatch, setIsLoading } = useVideoLib();
-  const { authState: {userId}} = useAuth();
+  const {
+    authState: { userId }
+  } = useAuth();
 
   const likedVideos = state.liked;
   const watchLaterVideos = state.watchLater;
@@ -32,11 +34,7 @@ export function Playlists() {
 
           <div className="video-display-playslist">
             {likedVideos.length > 0 ? (
-              likedVideos.map((video) => (
-                <VideoCard
-                  video={video}
-                />
-              ))
+              likedVideos.map((video) => <VideoCard video={video} />)
             ) : (
               <p> Go Like Some Videos to see here </p>
             )}
@@ -53,11 +51,7 @@ export function Playlists() {
 
           <div className="video-display-playslist">
             {watchLaterVideos.length > 0 ? (
-              watchLaterVideos.map((video) => (
-                <VideoCard
-                  video={ video }
-                />
-              ))
+              watchLaterVideos.map((video) => <VideoCard video={video} />)
             ) : (
               <p> Go mark some videos to see here </p>
             )}
@@ -76,7 +70,9 @@ export function Playlists() {
                     <span className="txt-white text-small"> See All </span>{" "}
                   </Link>
                   <button
-                    onClick={() => deletePlaylist(userId, name, dispatch, setIsLoading)}
+                    onClick={() =>
+                      deletePlaylist(userId, name, dispatch, setIsLoading)
+                    }
                     className="bttn bttn-secondary"
                   >
                     <i className="fa fa-trash" aria-hidden="true"></i>
@@ -84,10 +80,7 @@ export function Playlists() {
                 </h3>
                 <div className="video-display-playslist">
                   {videos.map((video) => (
-                    <PlaylistVideoCard
-                      video={video}
-                      playlistName={name}
-                    />
+                    <PlaylistVideoCard video={video} playlistName={name} />
                   ))}
                 </div>
               </div>

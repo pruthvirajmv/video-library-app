@@ -4,14 +4,16 @@ import { createNewPlaylist, toggleVideoInPlaylist } from "../utils";
 
 export function AddToPlaylistModal({ videoId, toggleModal }) {
   const { state, dispatch, setIsLoading } = useVideoLib();
-  const { authState: {userId}} = useAuth();
+  const {
+    authState: { userId }
+  } = useAuth();
 
   const [playlistName, setPlaylistName] = useState("");
 
   function addNewPlaylistHandler() {
     const newPlaylist = playlistName;
     if (newPlaylist !== "") {
-      createNewPlaylist(userId, playlistName, dispatch, setIsLoading)
+      createNewPlaylist(userId, playlistName, dispatch, setIsLoading);
     }
     setPlaylistName("");
   }
@@ -36,10 +38,18 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
           {state.playlist.map((list) => (
             <label key={videoId}>
               <input
-              className="input-checkbox"
+                className="input-checkbox"
                 type="checkbox"
-                checked={list.videos.some(video => video._id === videoId)}
-                onChange={() => toggleVideoInPlaylist(userId, list.name, videoId, dispatch, setIsLoading) }
+                checked={list.videos.some((video) => video._id === videoId)}
+                onChange={() =>
+                  toggleVideoInPlaylist(
+                    userId,
+                    list.name,
+                    videoId,
+                    dispatch,
+                    setIsLoading
+                  )
+                }
               />
               &nbsp;{list.name}
             </label>

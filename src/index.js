@@ -6,7 +6,6 @@ import App from "./App";
 import AuthContextProvider from "./context/auth/auth-context";
 import { VideosContextProvider } from "./context/videos/videos-context";
 
-
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
