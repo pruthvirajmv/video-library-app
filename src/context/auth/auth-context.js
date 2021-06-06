@@ -1,57 +1,34 @@
-import axios from 'axios';
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
-import { backendAPI } from "../../utils";
+import axios from "axios";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
+import { loadUserProfile, setupAuthHeaderForServiceCalls } from "../../utils";
 import { authReducer } from "./authReducer";
 
 const AuthContext = createContext();
 
-export default function AuthContextProvider({children}){
+export default function AuthContextProvider({ children }) {
+   const loginHistory = JSON.parse(localStorage?.getItem("loginSession"));
 
-    const initialState = {
-        userId : "",
-        userName : "",
-        userEmail : "",
-        isUserLoggedIn : false
-    }
+   const initialState = {
+      userName: "",
+      userEmail: "",
+      token: "",
+      isUserLoggedIn: false,
+   };
 
-    const [authState, authDispatch ] = useReducer(authReducer, initialState)
+   if (loginHistory?.token) {
+      setupAuthHeaderForServiceCalls(loginHistory.token);
+      initialState.token = loginHistory.token;
+   }
 
-    useEffect( () => {
-        const loginHistory = JSON.parse(localStorage?.getItem('loginSession'));
-      
-        if(loginHistory)  {
-            loginHistory.isUserLoggedIn && (async () => {
-                try{
-                    const {data: {success, user}} = await axios(
-                        {
-                            method: "GET",
-                            url: `${backendAPI.baseURI}/user/${loginHistory._id}`
-                        }
-                    )
-                    if(success){
-                        authDispatch({type: "LOAD_USER", payload: user})
-                    }
-                }
-                catch(error){
-                    if(axios.isAxiosError(error)){
-                        const serverError = error;
-                        if(serverError && serverError.response){
-                            return serverError.response.data;
-                        }
-                    }
-                    console.error(error.message);
-                }
-        })()
-    }
-    }, [] )
+   const [authState, authDispatch] = useReducer(authReducer, initialState);
 
-    return(
-        <AuthContext.Provider value = {{ authState, authDispatch}} >
-            {children}
-        </AuthContext.Provider>
-    )
+   useEffect(() => authState.token && loadUserProfile(authDispatch), [authState.token]);
+
+   return (
+      <AuthContext.Provider value={{ authState, authDispatch }}>{children}</AuthContext.Provider>
+   );
 }
 
 export const useAuth = () => {
-    return( useContext(AuthContext))
-}
+   return useContext(AuthContext);
+};

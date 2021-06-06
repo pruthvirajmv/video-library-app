@@ -1,42 +1,52 @@
-import {  createContext,  useContext,  useEffect,  useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 import { getVideosFromDb, getUserPlaylists, getUserLikedVideos, getUserHistory } from "../../utils";
 import { useAuth } from "../auth/auth-context";
 import videosReducer from "./videosReducer";
 
 const VideosContext = createContext();
 
+export const initialState = {
+   videos: [],
+   liked: [],
+   watchLater: [],
+   history: [],
+   playlist: [],
+};
+
 export function VideosContextProvider({ children }) {
+   const { authState } = useAuth();
 
-  const { authState } = useAuth();
+   const [state, dispatch] = useReducer(videosReducer, initialState);
 
-  const initialState = {
-    videos: [],
-    liked: [],
-    watchLater: [],
-    history: [],
-    playlist: []
-  }
+   const [isLoading, setIsLoading] = useState(true);
 
-  const [state, dispatch] = useReducer(videosReducer, initialState );
+   useEffect(() => getVideosFromDb(dispatch, setIsLoading), []);
 
-  const [isLoading, setIsLoading] = useState(true);
+   useEffect(() => {
+      if (authState.token) {
+         getUserPlaylists(dispatch, setIsLoading);
+      }
+   }, [authState.token]);
 
-  useEffect( () => getVideosFromDb(dispatch, setIsLoading), [])
+   useEffect(() => {
+      if (authState.token) {
+         getUserHistory(dispatch, setIsLoading);
+      }
+   }, [authState.token]);
 
-  useEffect( () => getUserPlaylists(authState.userId, dispatch, setIsLoading), [authState.isUserLoggedIn] );
+   useEffect(() => {
+      if (authState.token) {
+         getUserLikedVideos(dispatch, setIsLoading);
+      }
+   }, [authState.token]);
 
-  useEffect( () => getUserHistory(authState.userId, dispatch, setIsLoading), [authState.isUserLoggedIn] );
-
-  useEffect( () => getUserLikedVideos(authState.userId, dispatch, setIsLoading), [authState.isUserLoggedIn] )
-
-
-  return (
-    <VideosContext.Provider value={{ state, dispatch, isLoading, setIsLoading }}>
-      {children}
-    </VideosContext.Provider>
-  );
+   return (
+      <VideosContext.Provider value={{ state, dispatch, isLoading, setIsLoading }}>
+         {children}
+      </VideosContext.Provider>
+   );
 }
 
 export function useVideoLib() {
-  return useContext(VideosContext);
+   return useContext(VideosContext);
 }

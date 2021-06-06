@@ -1,22 +1,23 @@
+export function authReducer(state, { type, payload }) {
+   switch (type) {
+      case "LOAD_USER":
+         return {
+            ...state,
+            userName: payload.userName,
+            userEmail: payload.email,
+            isUserLoggedIn: true,
+         };
 
-export function authReducer(state, {type, payload} ) {
-    switch(type){
-        case "LOAD_USER" : 
-            return { ...state,
-                userId : payload._id, 
-                userName: payload.userName, 
-                userEmail: payload.email, 
-                isUserLoggedIn : true
-            }
-        
-        case "LOGOUT_USER" : 
-            return { ...state,
-                userId : "", 
-                userName: "", 
-                userEmail: "", 
-                isUserLoggedIn : false
-            }
+      case "LOGOUT_USER":
+         return { ...state, userName: "", userEmail: "", isUserLoggedIn: false, token: "" };
 
-        default : return state;
-    }
+      case "LOAD_TOKEN":
+         return {
+            ...state,
+            token: payload,
+         };
+
+      default:
+         return state;
+   }
 }
