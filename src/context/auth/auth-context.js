@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { loadUserProfile, setupAuthHeaderForServiceCalls } from "../../utils";
 import { authReducer } from "./authReducer";
@@ -21,8 +20,6 @@ export default function AuthContextProvider({ children }) {
    }
 
    const [authState, authDispatch] = useReducer(authReducer, initialState);
-
-   useEffect(() => authState.token && loadUserProfile(authDispatch), [authState.token]);
 
    return (
       <AuthContext.Provider value={{ authState, authDispatch }}>{children}</AuthContext.Provider>

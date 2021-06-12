@@ -1,16 +1,27 @@
 import "../../styles.css";
-import "./history.css";
+import "./horizontalVideoCard.styles.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { AddToPlaylistBttn, RemoveVideoFromHistoryBttn, WatchLaterBttn } from "../../components";
+import { RemoveVideoFromPlaylistBttn } from "../RemoveVideoFromPlaylistBttn";
 
-export default function HistoryVideoCard({ video }) {
+export function HorizontalVideoCard({ video, page }) {
    const [showBttns, setShowBttns] = useState(false);
 
+   const width = window.innerWidth;
+
+   useEffect(() => {
+      if (width <= 769) {
+         setShowBttns(true);
+      } else {
+         setShowBttns(false);
+      }
+   }, [width]);
+
    return (
-      <div key={video.videoId} className="card history-video-card ">
+      <div key={video.videoId} className="card horizontal-video-card ">
          <div className="video-image">
             <Link to={`/${video.videoId}`}>
                <img className="video-image" src={video.image} alt="video" />
@@ -32,7 +43,10 @@ export default function HistoryVideoCard({ video }) {
             </div>
             {showBttns && (
                <div className="action-bttns">
-                  <RemoveVideoFromHistoryBttn videoId={video._id} />
+                  {page === "History" && <RemoveVideoFromHistoryBttn videoId={video._id} />}
+                  {page !== "History" && page !== undefined && (
+                     <RemoveVideoFromPlaylistBttn videoId={video._id} playlistName={page} />
+                  )}
                   <AddToPlaylistBttn videoId={video._id} />
                   <WatchLaterBttn videoId={video._id} />
                </div>

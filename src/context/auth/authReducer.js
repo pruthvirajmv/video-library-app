@@ -1,23 +1,23 @@
-export function authReducer(state, { type, payload }) {
+export function authReducer(videoState, { type, payload }) {
    switch (type) {
       case "LOAD_USER":
          return {
-            ...state,
+            ...videoState,
             userName: payload.userName,
             userEmail: payload.email,
             isUserLoggedIn: true,
          };
 
       case "LOGOUT_USER":
-         return { ...state, userName: "", userEmail: "", isUserLoggedIn: false, token: "" };
+         return { ...videoState, userName: "", userEmail: "", isUserLoggedIn: false, token: "" };
 
       case "LOAD_TOKEN":
          return {
-            ...state,
+            ...videoState,
             token: payload,
          };
 
       default:
-         return state;
+         return videoState;
    }
 }

@@ -1,7 +1,10 @@
 import axios from "axios";
+import { toast } from "react-toastify";
+import { ToastWithUndoBttn } from "../../components";
 import { backendAPI, dispatchTypeEnum, checkError } from "../index";
 
-export const toggleVideoInPlaylist = async (playlistName, videoId, dispatch, setIsLoading) => {
+export const toggleVideoInPlaylist = async (params) => {
+   const { playlistName, videoId, dispatch, setIsLoading, videosList } = params;
    try {
       setIsLoading(true);
       const {
@@ -12,6 +15,15 @@ export const toggleVideoInPlaylist = async (playlistName, videoId, dispatch, set
          data: { playlistName: playlistName, video: videoId },
       });
       if (success) {
+         toast(
+            <ToastWithUndoBttn
+               undoFunction={toggleVideoInPlaylist}
+               undoParams={params}
+               currentList={videosList}
+               updatedList={playlist.videos}
+               listName={playlistName}
+            />
+         );
          dispatch({ type: dispatchTypeEnum.TOGGLE_VIDEO_IN_PLAYLIST, payload: playlist });
       }
    } catch (error) {

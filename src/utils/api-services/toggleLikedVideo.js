@@ -1,7 +1,10 @@
 import axios from "axios";
+import { ToastWithUndoBttn } from "../../components";
 import { backendAPI, checkError } from "../index";
 
-export const toggleLikedVideo = async (videoId, dispatch, setIsLoading, toast) => {
+export const toggleLikedVideo = async (params) => {
+   const { videoId, dispatch, setIsLoading, toast, currentLikedVideos } = params;
+
    try {
       setIsLoading(true);
       const {
@@ -12,8 +15,16 @@ export const toggleLikedVideo = async (videoId, dispatch, setIsLoading, toast) =
          data: { video: videoId },
       });
       if (success) {
+         toast(
+            <ToastWithUndoBttn
+               undoFunction={toggleLikedVideo}
+               undoParams={params}
+               updatedList={likedVideos}
+               currentList={currentLikedVideos}
+               listName="Liked Videos"
+            />
+         );
          dispatch({ type: "TOGGLE_LIKE", payload: likedVideos });
-         toast("Wow so easy !");
       }
    } catch (error) {
       checkError(error);

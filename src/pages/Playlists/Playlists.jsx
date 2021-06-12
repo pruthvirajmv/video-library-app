@@ -8,14 +8,14 @@ import PlaylistVideoCard from "./PlaylistVideoCard";
 import { Link } from "react-router-dom";
 
 export function Playlists() {
-   const { state, dispatch, setIsLoading } = useVideoLib();
+   const { videoState, dispatch, setIsLoading } = useVideoLib();
    const {
       authState: { userId },
    } = useAuth();
 
-   const likedVideos = state.liked;
-   const watchLaterVideos = state.watchLater;
-   const playlist = state.playlist;
+   const likedVideos = videoState.liked;
+   const watchLaterVideos = videoState.watchLater;
+   const playlist = videoState.playlist;
 
    useEffect(() => {
       document.title = "Video Lib | Playlists";
@@ -34,7 +34,7 @@ export function Playlists() {
 
                <div className="video-display-playslist">
                   {likedVideos.length > 0 ? (
-                     likedVideos.map((video) => <VideoCard video={video} />)
+                     likedVideos.slice(0, 3).map((video) => <VideoCard video={video} />)
                   ) : (
                      <p> Like some videos to see here </p>
                   )}
@@ -51,7 +51,7 @@ export function Playlists() {
 
                <div className="video-display-playslist">
                   {watchLaterVideos.length > 0 ? (
-                     watchLaterVideos.map((video) => <VideoCard video={video} />)
+                     watchLaterVideos.slice(0, 3).map((video) => <VideoCard video={video} />)
                   ) : (
                      <p> Go mark some videos to see here </p>
                   )}
@@ -65,9 +65,8 @@ export function Playlists() {
                      <div key={name}>
                         <h3 className="txt-primary txt-align-left">
                            {name}
-                           <Link to={`/playlists/${name}`}>
-                              {" "}
-                              <span className="txt-white text-small"> See All </span>{" "}
+                           <Link to="/playlists/playlist" state={{ playlistName: name }}>
+                              <span className="txt-white text-small"> See All </span>
                            </Link>
                            <button
                               onClick={() => deletePlaylist(name, dispatch, setIsLoading)}
@@ -76,7 +75,7 @@ export function Playlists() {
                            </button>
                         </h3>
                         <div className="video-display-playslist">
-                           {videos.map((video) => (
+                           {videos.slice(0, 3).map((video) => (
                               <PlaylistVideoCard video={video} playlistName={name} />
                            ))}
                         </div>

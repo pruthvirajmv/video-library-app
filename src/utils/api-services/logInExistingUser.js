@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { backendAPI, checkError, setupAuthHeaderForServiceCalls } from "../index";
 
 export const logInExistingUser = async (
@@ -25,6 +26,7 @@ export const logInExistingUser = async (
          authDispatch({ type: "LOAD_TOKEN", payload: token });
          authDispatch({ type: "LOAD_USER", payload: user });
          navigateTo(state?.from ? state.from : "/");
+         toast("Successfully logged in");
          localStorage?.setItem("loginSession", JSON.stringify({ isUserLoggedIn: true, token }));
       }
    } catch (error) {

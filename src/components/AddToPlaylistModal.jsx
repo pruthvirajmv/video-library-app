@@ -3,10 +3,7 @@ import { useAuth, useVideoLib } from "../context";
 import { createNewPlaylist, toggleVideoInPlaylist } from "../utils";
 
 export function AddToPlaylistModal({ videoId, toggleModal }) {
-   const { state, dispatch, setIsLoading } = useVideoLib();
-   const {
-      authState: { userId },
-   } = useAuth();
+   const { videoState, dispatch, setIsLoading } = useVideoLib();
 
    const [playlistName, setPlaylistName] = useState("");
 
@@ -35,19 +32,26 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
                </button>
             </div>
             <div className="modal-body">
-               {state.playlist.map((list) => (
-                  <label key={videoId}>
-                     <input
-                        className="input-checkbox"
-                        type="checkbox"
-                        checked={list.videos.some((video) => video._id === videoId)}
-                        onChange={() =>
-                           toggleVideoInPlaylist(list.name, videoId, dispatch, setIsLoading)
-                        }
-                     />
-                     &nbsp;{list.name}
-                  </label>
-               ))}
+               {videoState.playlist.map((list) => {
+                  const toggleVideoInPlaylistArgs = {
+                     playlistName: list.name,
+                     videoId: videoId,
+                     dispatch: dispatch,
+                     setIsLoading: setIsLoading,
+                     videosList: list.videos,
+                  };
+                  return (
+                     <label key={videoId}>
+                        <input
+                           className="input-checkbox"
+                           type="checkbox"
+                           checked={list.videos.some((video) => video._id === videoId)}
+                           onChange={() => toggleVideoInPlaylist(toggleVideoInPlaylistArgs)}
+                        />
+                        &nbsp;{list.name}
+                     </label>
+                  );
+               })}
             </div>
             <footer>
                <button onClick={toggleModal} className="bttn bttn-secondary">

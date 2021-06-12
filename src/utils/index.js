@@ -17,6 +17,7 @@ export { getUserPlaylists } from "./api-services/getUserPlaylists";
 export { createNewPlaylist } from "./api-services/createNewPlaylist";
 export { toggleVideoInPlaylist } from "./api-services/toggleVideoInPlaylist";
 export { deletePlaylist } from "./api-services/deletePlaylist";
+export { renamePlaylist } from "./api-services/renamePlaylist";
 
 export { toggleWatchLater } from "./api-services/toggleWatchLater";
 

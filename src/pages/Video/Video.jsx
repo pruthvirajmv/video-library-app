@@ -11,10 +11,10 @@ import { useVideoLib } from "../../context";
 import { addVideoToHistory } from "../../utils";
 
 export function Video() {
-   const { state, dispatch, setIsLoading } = useVideoLib();
+   const { videoState, dispatch, setIsLoading } = useVideoLib();
    const { videoId } = useParams();
 
-   const displayVideo = state.videos.find((video) => video.videoId === videoId);
+   const displayVideo = videoState.videos.find((video) => video.videoId === videoId);
 
    useEffect(() => {
       addVideoToHistory(displayVideo._id, dispatch, setIsLoading);

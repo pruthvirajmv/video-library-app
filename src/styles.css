@@ -123,7 +123,7 @@
 
 /* CSS components */
 .txt-white {
-   color: white;
+   color: #ffffff;
 }
 
 .txt-primary {
@@ -138,6 +138,8 @@
 .flex-row {
    display: flex;
    width: 100%;
+   column-gap: 0.5rem;
+   align-items: center;
 }
 
 .input-checkbox {

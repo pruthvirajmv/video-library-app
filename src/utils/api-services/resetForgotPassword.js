@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 import { backendAPI } from "../index";
 
@@ -26,6 +27,7 @@ export const resetForgotPassword = async (
          dispatch({ type: "SHOW_TOAST", payload: "Password Reset Successful" });
          setIsLoading(false);
          navigateTo("/profile");
+         toast("Password rest successfull");
       }
    } catch (err) {
       if (err.response.status === 404) {

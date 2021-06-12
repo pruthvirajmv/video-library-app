@@ -1,8 +1,9 @@
 import axios from "axios";
 import { backendAPI, checkError } from "../index";
 
-export const loadUserProfile = async (authDispatch) => {
+export const loadUserProfile = async (authDispatch, setIsLoading) => {
    try {
+      setIsLoading(true);
       const {
          data: { success, user },
       } = await axios({
@@ -14,5 +15,7 @@ export const loadUserProfile = async (authDispatch) => {
       }
    } catch (error) {
       checkError(error);
+   } finally {
+      setIsLoading(false);
    }
 };

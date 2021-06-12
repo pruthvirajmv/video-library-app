@@ -16,7 +16,7 @@ export const initialState = {
 export function VideosContextProvider({ children }) {
    const { authState } = useAuth();
 
-   const [state, dispatch] = useReducer(videosReducer, initialState);
+   const [videoState, dispatch] = useReducer(videosReducer, initialState);
 
    const [isLoading, setIsLoading] = useState(true);
 
@@ -41,7 +41,7 @@ export function VideosContextProvider({ children }) {
    }, [authState.token]);
 
    return (
-      <VideosContext.Provider value={{ state, dispatch, isLoading, setIsLoading }}>
+      <VideosContext.Provider value={{ videoState, dispatch, isLoading, setIsLoading }}>
          {children}
       </VideosContext.Provider>
    );

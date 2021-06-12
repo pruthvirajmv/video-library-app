@@ -3,11 +3,11 @@ import "./history.css";
 import { useEffect } from "react";
 
 import { useVideoLib } from "../../context";
-import HistoryVideoCard from "./HistoryVideoCard";
+import { HorizontalVideoCard } from "../../components";
 import { clearHistory } from "../../utils";
 
 export function History() {
-   const { state, dispatch, setIsLoading } = useVideoLib();
+   const { videoState, dispatch, setIsLoading } = useVideoLib();
 
    useEffect(() => {
       document.title = "Video lib | History";
@@ -22,8 +22,10 @@ export function History() {
             </button>
          </div>
          <div className="video-display-history">
-            {state.history.length > 0 ? (
-               state.history.map((video) => <HistoryVideoCard video={video} />)
+            {videoState.history.length > 0 ? (
+               videoState.history.map((video) => (
+                  <HorizontalVideoCard video={video} page="History" />
+               ))
             ) : (
                <p>Watched videos will appear here</p>
             )}

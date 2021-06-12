@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { backendAPI, dispatchTypeEnum, checkError } from "../index";
 
 export const deletePlaylist = async (playlistName, dispatch, setIsLoading) => {
@@ -13,6 +14,7 @@ export const deletePlaylist = async (playlistName, dispatch, setIsLoading) => {
       });
       if (success) {
          dispatch({ type: dispatchTypeEnum.DELETE_PLAYLIST, payload: playlistName });
+         toast("Playslist deleted");
       }
    } catch (error) {
       checkError(error);

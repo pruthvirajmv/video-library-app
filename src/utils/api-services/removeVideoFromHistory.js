@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { backendAPI, checkError } from "../index";
 
 export const removeVideoFromHistory = async (videoId, dispatch, setIsLoading) => {
@@ -13,6 +14,7 @@ export const removeVideoFromHistory = async (videoId, dispatch, setIsLoading) =>
       });
       if (success) {
          dispatch({ type: "REMOVE_VIDEO_FROM_HISTORY", payload: videoId });
+         toast("Removed from history");
       }
    } catch (error) {
       checkError(error);

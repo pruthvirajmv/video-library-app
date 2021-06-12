@@ -25,15 +25,22 @@ import {
 } from "./components";
 
 import { Routes, Route } from "react-router-dom";
-import { useVideoLib } from "./context";
-import { useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { useAuth, useVideoLib } from "./context";
+import { useState, useEffect } from "react";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { loadUserProfile } from "./utils";
 
 // toast.configure();
 
 export default function App() {
-   const { isLoading } = useVideoLib();
+   const { authState, authDispatch } = useAuth();
+   const { isLoading, setIsLoading } = useVideoLib();
+
+   useEffect(
+      () => authState.token && loadUserProfile(authDispatch, setIsLoading),
+      [authState.token]
+   );
 
    const [showNav, setShowNav] = useState(false);
 
@@ -46,12 +53,17 @@ export default function App() {
             <AppSideNavBar showNav={showNav} />
             <AppSideNavBarMobile showNav={showNav} />
             <div className="app-display">
-               <ToastContainer />
+               <ToastContainer
+                  position="bottom-left"
+                  autoClose={3000}
+                  hideProgressBar={true}
+                  transition={Slide}
+               />
                <Routes>
                   <Route path="/" element={<Home />} />
                   <PrivateRoute path="/:videoId" element={<Video />} />
                   <PrivateRoute path="/playlists" element={<Playlists />} />
-                  <PrivateRoute path="/playlists/:list" element={<Playlist />} />
+                  <PrivateRoute path="/playlists/playlist" element={<Playlist />} />
                   <PrivateRoute path="/history" element={<History />} />
                   <PrivateRoute path="/watchLater" element={<WatchLater />} />
                   <PrivateRoute path="/liked" element={<LikedVideos />} />

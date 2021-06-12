@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { backendAPI, dispatchTypeEnum, checkError } from "../index";
 
 export const createNewPlaylist = async (playlistName, dispatch, setIsLoading) => {
@@ -13,6 +14,7 @@ export const createNewPlaylist = async (playlistName, dispatch, setIsLoading) =>
       });
       if (success) {
          dispatch({ type: dispatchTypeEnum.ADD_NEW_PLAYLIST, payload: playlist });
+         toast("New playlist created");
       }
    } catch (error) {
       checkError(error);
