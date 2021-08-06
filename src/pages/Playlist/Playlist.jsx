@@ -13,10 +13,8 @@ export function Playlist() {
 
    const [renameModal, setRenameModal] = useState(false);
    const [playlist, setPlaylist] = useState([]);
-   console.log(playlist);
 
    useEffect(() => {
-      console.log(playlistId, videoState);
       setPlaylist(() => videoState.playlist.find((list) => list._id === playlistId));
    }, [videoState]);
 

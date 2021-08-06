@@ -15,7 +15,7 @@ export function ToastWithUndoBttn({
       undo = false;
       undoFunction(undoParams);
    }
-   // console.log(updatedList);
+
    useEffect(() => (undo = true), []);
 
    return (
