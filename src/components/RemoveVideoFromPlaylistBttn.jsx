@@ -4,7 +4,7 @@ import { toggleVideoInPlaylist } from "../utils";
 export function RemoveVideoFromPlaylistBttn({ playlistName, videoId }) {
    const { videoState, dispatch, setIsLoading } = useVideoLib();
 
-   const playlistVideos = videoState.playlist.find((list) => list.name === playlistName).videos;
+   const playlistVideos = videoState.playlist.find((list) => list.name === playlistName)?.videos;
 
    const toggleVideoInPlaylistArgs = {
       playlistName: playlistName,

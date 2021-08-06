@@ -13,7 +13,7 @@ export const addNewUser = async (
       setIsLoading(true);
       const {
          status,
-         data: { addedUser, token },
+         data: { newUser, token },
       } = await axios({
          method: "POST",
          url: `${backendAPI.baseURI}/user/register`,
@@ -21,7 +21,7 @@ export const addNewUser = async (
       });
       if (status === 200) {
          navigate("/");
-         authDispatch({ type: "LOAD_USER", payload: addedUser });
+         authDispatch({ type: "LOAD_USER", payload: newUser });
          localStorage?.setItem("loginSession", JSON.stringify({ isUserLoggedIn: true, token }));
       }
    } catch (err) {

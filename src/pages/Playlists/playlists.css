@@ -28,3 +28,10 @@
 .playlist-card {
    width: 10rem;
 }
+
+.bttn-icon {
+   border: none;
+   background-color: initial;
+   color: initial;
+   font-size: 1.2rem;
+}

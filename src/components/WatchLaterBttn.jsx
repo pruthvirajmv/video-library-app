@@ -22,15 +22,15 @@ export function WatchLaterBttn({ videoId }) {
             onClick={() => toggleWatchLater(toggleWatchLaterArgs)}
             className="video-bttn">
             {videoState.watchLater.find((video) => video._id === videoId) ? (
-               <div>
-                  {showText && <span>Added </span>}
+               <>
+                  {showText && <span>Added</span>}
                   <i className="fa fa-check-circle fa-lg" aria-hidden="true"></i>
-               </div>
+               </>
             ) : (
-               <div>
+               <>
                   {showText && <span>Watchlater </span>}
                   <i className="fa fa-clock-o fa-lg" aria-hidden="true"></i>
-               </div>
+               </>
             )}
          </div>
       </>

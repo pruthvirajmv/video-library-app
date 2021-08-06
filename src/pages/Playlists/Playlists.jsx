@@ -61,16 +61,16 @@ export function Playlists() {
             <div className="playlist-section">
                <h3 className="txt-white txt-align-left">Playlists</h3>
                {playlist.length > 0 ? (
-                  playlist.map(({ name, videos }) => (
+                  playlist.map(({ _id, name, videos }) => (
                      <div key={name}>
                         <h3 className="txt-primary txt-align-left">
                            {name}
-                           <Link to="/playlists/playlist" state={{ playlistName: name }}>
+                           <Link to={`/playlists/playlist/${_id}`}>
                               <span className="txt-white text-small"> See All </span>
                            </Link>
                            <button
                               onClick={() => deletePlaylist(name, dispatch, setIsLoading)}
-                              className="bttn bttn-secondary">
+                              className="bttn bttn-secondary bttn-icon">
                               <i className="fa fa-trash" aria-hidden="true"></i>
                            </button>
                         </h3>

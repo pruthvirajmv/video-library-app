@@ -28,24 +28,24 @@ export function Profile() {
             <form className="form-container" onSubmit={logOutSubmitHandler}>
                <h2>Welcome {authState.userName} !</h2>
                <section>
-                  <label>User Name</label>
+                  <label>User Name: </label>
                   <div>{authState.userName}</div>
                </section>
 
                <section>
-                  <label>Email</label>
+                  <label>Email: </label>
                   <div>{authState.userEmail}</div>
                </section>
                <button type="submit" className="bttn bttn-primary login">
                   Logout
                </button>
             </form>
-            <div>
+            {/* <div>
                Reset password?{" "}
                <button onClick={() => navigate("/reset")} className="bttn bttn-secondary">
                   Reset
                </button>{" "}
-            </div>
+            </div> */}
          </div>
       </>
    );

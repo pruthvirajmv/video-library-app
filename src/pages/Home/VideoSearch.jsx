@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 
-export default function ProductsSearch({ setSearchInput }) {
-   const [input, setInput] = useState("");
-
-   function searchHandler(event) {
-      if (event.key === "Enter") {
-         setSearchInput(input);
-      }
-   }
-
+export default function ProductsSearch({ searchInput, setSearchInput }) {
    function clearSearch() {
-      setInput("");
       setSearchInput("");
    }
 
@@ -20,18 +11,15 @@ export default function ProductsSearch({ setSearchInput }) {
             <input
                className="input"
                type="text"
-               value={input}
+               value={searchInput}
                placeholder="Search videos"
-               onChange={(e) => setInput(() => e.target.value)}
-               onKeyDown={searchHandler}
+               onChange={(e) => setSearchInput(() => e.target.value)}
             />
-            {input !== "" && (
+            {searchInput !== "" ? (
                <i className="fa fa-times" aria-hidden="true" onClick={clearSearch}></i>
+            ) : (
+               <i className="fa fa-search" aria-hidden="true"></i>
             )}
-            <i
-               className="fa fa-search"
-               aria-hidden="true"
-               onClick={() => setSearchInput(input)}></i>
          </div>
       </>
    );

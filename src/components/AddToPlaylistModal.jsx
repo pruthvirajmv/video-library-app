@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth, useVideoLib } from "../context";
+import { useVideoLib } from "../context";
 import { createNewPlaylist, toggleVideoInPlaylist } from "../utils";
 
 export function AddToPlaylistModal({ videoId, toggleModal }) {
@@ -10,7 +10,7 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
    function addNewPlaylistHandler() {
       const newPlaylist = playlistName;
       if (newPlaylist !== "") {
-         createNewPlaylist(playlistName, dispatch, setIsLoading);
+         createNewPlaylist(playlistName, videoId, dispatch, setIsLoading);
       }
       setPlaylistName("");
    }
@@ -32,6 +32,7 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
                </button>
             </div>
             <div className="modal-body">
+               {videoState.playlist.length === 0 && <p>No playlist</p>}
                {videoState.playlist.map((list) => {
                   const toggleVideoInPlaylistArgs = {
                      playlistName: list.name,
@@ -41,7 +42,7 @@ export function AddToPlaylistModal({ videoId, toggleModal }) {
                      videosList: list.videos,
                   };
                   return (
-                     <label key={videoId}>
+                     <label key={list._id} className="label-playlist">
                         <input
                            className="input-checkbox"
                            type="checkbox"

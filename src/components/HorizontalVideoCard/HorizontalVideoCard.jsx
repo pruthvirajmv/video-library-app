@@ -44,7 +44,7 @@ export function HorizontalVideoCard({ video, page }) {
             {showBttns && (
                <div className="action-bttns">
                   {page === "History" && <RemoveVideoFromHistoryBttn videoId={video._id} />}
-                  {page !== "History" && page !== undefined && (
+                  {page !== "History" && (
                      <RemoveVideoFromPlaylistBttn videoId={video._id} playlistName={page} />
                   )}
                   <AddToPlaylistBttn videoId={video._id} />

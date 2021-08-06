@@ -42,16 +42,16 @@ export default function videosReducer(videoState, { type, payload }) {
       case dispatchTypeEnum.ADD_NEW_PLAYLIST:
          return {
             ...videoState,
-            playlist: videoState.playlist.find(({ name }) => name === payload)
-               ? videoState.playlist
-               : videoState.playlist.concat(payload),
+            playlist: [...videoState.playlist, payload],
          };
 
       case dispatchTypeEnum.RENAME_PLAYLIST:
          return {
             ...videoState,
-            playlist: videoState.playlist.map(({ name }) =>
-               name === payload.playlistName ? name : payload.updatedPlaylistName
+            playlist: videoState.playlist.map((list) =>
+               list.name !== payload.playlistName
+                  ? list
+                  : { ...list, name: payload.updatedPlaylistName }
             ),
          };
 

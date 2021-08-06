@@ -15,23 +15,44 @@ export function Login() {
    const { dispatch, setIsLoading } = useVideoLib();
    const { authDispatch } = useAuth();
 
-   const user = useInput("");
-   const userPassword = useInput("");
+   const email = useInput("");
+   const password = useInput("");
 
    const [showPassword, setShowPassword] = useState(false);
 
    const [errorMsg, setErrorMsg] = useState("");
 
    const loginSubmitHandler = (e) => {
-      e.preventDefault();
+      e?.preventDefault();
       logInExistingUser(
-         user.value,
-         userPassword.value,
+         email.value,
+         password.value,
          authDispatch,
          setIsLoading,
          setErrorMsg,
          navigate,
          state
+      );
+   };
+
+   const guestUserLogin = () => {
+      const guestEmail = "guestuser@gmail.com";
+      const guestPassword = "neoG@2021";
+
+      email.ref.current.value = guestEmail;
+      password.ref.current.value = guestPassword;
+      setTimeout(
+         () =>
+            logInExistingUser(
+               guestEmail,
+               guestPassword,
+               authDispatch,
+               setIsLoading,
+               setErrorMsg,
+               navigate,
+               state
+            ),
+         1000
       );
    };
 
@@ -41,12 +62,12 @@ export function Login() {
             <form className="form-container" onSubmit={loginSubmitHandler}>
                <h2>User Login</h2>
                <section>
-                  <label>User Name</label>
+                  <label>User Email</label>
                   <input
                      className="input input-primary"
                      type="text"
-                     {...user}
-                     placeholder="enter username"
+                     {...email}
+                     placeholder="enter registered email"
                      required></input>
                </section>
 
@@ -56,8 +77,8 @@ export function Login() {
                      <input
                         className="input"
                         type={showPassword ? "text" : "password"}
-                        {...userPassword}
-                        placeholder="enter password"
+                        {...password}
+                        placeholder="enter your password"
                         minLength="8"
                         required></input>
                      <span>
@@ -76,16 +97,16 @@ export function Login() {
             <p className="error-msg">{errorMsg}</p>
 
             <div>
-               Forgot your password?{" "}
-               <button onClick={() => navigate("/reset")} className="bttn bttn-secondary">
-                  Reset
-               </button>{" "}
+               <span>Visit as guest user? </span>
+               <button onClick={guestUserLogin} className="bttn bttn-secondary">
+                  Guest
+               </button>
             </div>
             <div>
-               Not a user yet?{" "}
+               <span>Not a user yet? </span>
                <button onClick={() => navigate("/signup")} className="bttn bttn-secondary">
                   Sign Up
-               </button>{" "}
+               </button>
             </div>
          </div>
       </>

@@ -11,9 +11,9 @@
    flex-direction: row;
    flex-wrap: wrap;
    gap: 0.5rem;
-   margin-top: 2rem;
    width: 80%;
    margin: auto;
+   margin-top: 2rem;
    justify-content: center;
    align-items: center;
 }

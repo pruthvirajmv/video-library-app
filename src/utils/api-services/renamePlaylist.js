@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { dispatchTypeEnum } from "../dispatchTypeEnum";
 
 import { backendAPI, checkError } from "../index";
 
@@ -15,7 +16,7 @@ export const renamePlaylist = async (playlistName, updatedPlaylistName, dispatch
       });
       if (success) {
          dispatch({
-            type: "RENAME_Playlist_HISTORY",
+            type: dispatchTypeEnum.RENAME_PLAYLIST,
             payload: { playlistName: playlistName, updatedPlaylistName: updatedPlaylistName },
          });
          toast("Playlist Renamed");

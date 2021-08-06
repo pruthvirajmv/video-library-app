@@ -24,7 +24,7 @@ import {
    Loader,
 } from "./components";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useAuth, useVideoLib } from "./context";
 import { useState, useEffect } from "react";
 import { ToastContainer, Slide } from "react-toastify";
@@ -36,11 +36,16 @@ import { loadUserProfile } from "./utils";
 export default function App() {
    const { authState, authDispatch } = useAuth();
    const { isLoading, setIsLoading } = useVideoLib();
+   const { pathname } = useLocation();
 
    useEffect(
       () => authState.token && loadUserProfile(authDispatch, setIsLoading),
       [authState.token]
    );
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, [pathname]);
 
    const [showNav, setShowNav] = useState(false);
 
@@ -63,7 +68,7 @@ export default function App() {
                   <Route path="/" element={<Home />} />
                   <PrivateRoute path="/:videoId" element={<Video />} />
                   <PrivateRoute path="/playlists" element={<Playlists />} />
-                  <PrivateRoute path="/playlists/playlist" element={<Playlist />} />
+                  <PrivateRoute path="/playlists/playlist/:playlistId" element={<Playlist />} />
                   <PrivateRoute path="/history" element={<History />} />
                   <PrivateRoute path="/watchLater" element={<WatchLater />} />
                   <PrivateRoute path="/liked" element={<LikedVideos />} />

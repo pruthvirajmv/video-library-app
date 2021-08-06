@@ -28,7 +28,8 @@ export function Home() {
 
    return (
       <>
-         <VideoSearch setSearchInput={setSearchInput} />
+         <VideoSearch searchInput={searchInput} setSearchInput={setSearchInput} />
+         {displayVideos.length === 0 && <p>No video found</p>}
          <div className="video-display-homepage">
             {displayVideos.map((video) => (
                <VideoCard key={video.videoId} video={video} />
