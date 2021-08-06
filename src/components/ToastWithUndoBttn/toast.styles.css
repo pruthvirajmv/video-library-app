@@ -1,0 +1,16 @@
+/* toast styles */
+.Toastify__toast-container {
+   min-width: 10rem;
+   max-width: max-content;
+}
+.Toastify__toast {
+   min-height: 2rem !important;
+}
+.Toastify__toast--default {
+   background: var(--bg-color) !important;
+   color: var(--primary) !important;
+}
+.Toastify__close-button {
+   color: #ffffff !important;
+   opacity: 1 !important;
+}

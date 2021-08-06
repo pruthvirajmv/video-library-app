@@ -1,0 +1,69 @@
+.video-display-history {
+   width: 80%;
+   margin: auto;
+   display: flex;
+   flex-direction: column-reverse;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   row-gap: 1rem;
+   margin-top: 2rem;
+}
+.history-head {
+   display: flex;
+   justify-content: space-between;
+   margin: auto;
+   margin-top: 2rem;
+   align-items: flex-end;
+   width: 90%;
+   max-width: 40rem;
+}
+
+.history-video-card {
+   width: 80%;
+   flex-direction: column;
+}
+
+.history-video-card .video-image {
+   width: 100%;
+   height: auto;
+}
+
+.history-video-card > .video-details {
+   display: flex;
+   flex-direction: row;
+   flex-grow: 1;
+}
+
+.history-video-card .video-title {
+   justify-self: flex-start;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: flex-start;
+   row-gap: 1rem;
+}
+
+.video-sub-title {
+   display: flex;
+   align-items: center;
+   column-gap: 0.5rem;
+}
+
+.video-display-history .action-bttns {
+   justify-self: flex-end;
+}
+
+@media screen and (min-width: 768px) {
+   .history-video-card {
+      width: 40rem;
+      height: 8rem;
+      flex-direction: row;
+      justify-content: flex-start;
+   }
+
+   .history-video-card .video-image {
+      height: 100%;
+      width: auto;
+   }
+}

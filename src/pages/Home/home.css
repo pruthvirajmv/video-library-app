@@ -1,0 +1,128 @@
+.video-display-homepage {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, 300px);
+   grid-gap: 1rem;
+   flex: 1 1;
+   margin-top: 1rem;
+   justify-content: center;
+}
+
+.video-card {
+   height: 100%;
+   row-gap: 0.5rem;
+   padding: 0;
+   position: relative;
+}
+
+.video-image {
+   width: 100%;
+}
+
+.video-card .video-details {
+   display: flex;
+   flex-direction: column;
+   row-gap: 0.5rem;
+   -webkit-flex-grow: 1;
+   flex-grow: 1;
+   width: 100%;
+}
+
+.video-title {
+   display: flex;
+   text-align: left;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 0.5rem;
+   -webkit-flex-grow: 1;
+   flex-grow: 1;
+   column-gap: 0.5rem;
+}
+
+.video-title .avatar {
+   align-self: flex-start;
+}
+
+.video-like {
+   background: none;
+   border: var(--primary);
+   font-size: 1.5rem;
+   color: var(--primary);
+   cursor: pointer;
+   align-self: flex-start;
+}
+
+.action-bttns {
+   position: absolute;
+   right: 0;
+   top: 0;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   row-gap: 0.5rem;
+   padding: 0.5rem;
+   align-items: flex-end;
+}
+
+.video-bttn {
+   background-color: rgba(0, 0, 0, 0.7);
+   padding: 0.3rem;
+   border-radius: 0.2rem;
+   cursor: pointer;
+   min-width: 1.6rem;
+   height: 1.6rem;
+   max-width: fit-content;
+   font-size: 0.8rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   column-gap: 0.3rem;
+}
+
+/* Search Bar */
+
+.searchBar-container {
+   display: flex;
+   column-gap: 0.5rem;
+   margin: 0.5rem;
+}
+
+.search-bar {
+   display: flex;
+   width: 100%;
+   padding: 0.3rem 0.4rem;
+   margin: auto;
+   border: 1px solid gray;
+   justify-content: center;
+   background-color: white;
+   align-items: center;
+   column-gap: 0.5rem;
+}
+
+.search-bar > i {
+   display: block;
+   cursor: pointer;
+   font-size: 1.3rem;
+}
+
+@media screen and (min-width: 768px) {
+   .search-bar {
+      position: fixed;
+      top: 1rem;
+      left: calc(50% - 140px);
+      width: 280px;
+      z-index: 2;
+   }
+
+   .homepage-layout {
+      display: grid;
+      grid-template-columns: 12rem auto;
+      grid-template-areas: "side-nav videos";
+      position: relative;
+      column-gap: 2rem;
+   }
+
+   .video-display-homepage {
+      grid-area: videos;
+      justify-content: flex-start;
+   }
+}
