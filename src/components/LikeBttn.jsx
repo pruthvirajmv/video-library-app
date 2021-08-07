@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useVideoLib } from "../context";
+import { useAuth, useVideoLib } from "../context";
 import { toggleLikedVideo } from "../utils";
 
 export function LikeBttn({ videoId }) {
+   const navigate = useNavigate();
+
    const { videoState, dispatch, setIsLoading } = useVideoLib();
+   const {
+      authState: { isUserLoggedIn },
+   } = useAuth();
 
    const toggleLikedVideoArgs = {
       videoId: videoId,
@@ -17,7 +23,11 @@ export function LikeBttn({ videoId }) {
    return (
       <>
          <button
-            onClick={() => toggleLikedVideo(toggleLikedVideoArgs)}
+            onClick={
+               isUserLoggedIn
+                  ? () => toggleLikedVideo(toggleLikedVideoArgs)
+                  : () => navigate("/login")
+            }
             className="video-like"
             style={{
                color: videoState.liked.find((video) => video._id === videoId) ? "" : "black",

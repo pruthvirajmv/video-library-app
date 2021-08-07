@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { useVideoLib } from "../context";
+import { useNavigate } from "react-router-dom";
+import { useAuth, useVideoLib } from "../context";
 import { toggleWatchLater } from "../utils";
 
 export function WatchLaterBttn({ videoId }) {
+   const navigate = useNavigate();
+
    const { videoState, dispatch, setIsLoading } = useVideoLib();
+   const {
+      authState: { isUserLoggedIn },
+   } = useAuth();
 
    const [showText, setShowText] = useState(false);
 
@@ -19,7 +25,11 @@ export function WatchLaterBttn({ videoId }) {
          <div
             onMouseEnter={() => setShowText(true)}
             onMouseLeave={() => setShowText(false)}
-            onClick={() => toggleWatchLater(toggleWatchLaterArgs)}
+            onClick={
+               isUserLoggedIn
+                  ? () => toggleWatchLater(toggleWatchLaterArgs)
+                  : () => navigate("/login")
+            }
             className="video-bttn">
             {videoState.watchLater.find((video) => video._id === videoId) ? (
                <>

@@ -66,7 +66,7 @@ export default function App() {
                />
                <Routes>
                   <Route path="/" element={<Home />} />
-                  <PrivateRoute path="/:videoId" element={<Video />} />
+                  <Route path="/:videoId" element={<Video />} />
                   <PrivateRoute path="/playlists" element={<Playlists />} />
                   <PrivateRoute path="/playlists/playlist/:playlistId" element={<Playlist />} />
                   <PrivateRoute path="/history" element={<History />} />
